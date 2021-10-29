@@ -2,7 +2,7 @@ let video=document.querySelector("video");
 let recordBtn=document.querySelector(".record");
 let captureBtn=document.querySelector(".capture");
 let timercont=document.querySelector(".timer-cont");
-let filterColor;
+let filterColor="#ffffff00";
 let normal="#ffffff00";
 let blue="#0000ff54";
 let red="#ff000054";
