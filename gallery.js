@@ -106,7 +106,7 @@ function downloadListener(e) {
             let imageResult = imageRequest.result;
 
             let a = document.createElement("a");
-            a.href = imageResult.url;
+            a.href = imageResult.URLi;
             a.download = "image.jpg";
             a.click();
         }
