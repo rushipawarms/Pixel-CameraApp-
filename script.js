@@ -2,12 +2,12 @@ let video=document.querySelector("video");
 let recordBtn=document.querySelector(".record");
 let captureBtn=document.querySelector(".capture");
 let timercont=document.querySelector(".timer-cont");
-let filterColor="#ffffff00";
+let filterColor="transparent";
 let normal="#ffffff00";
 let blue="#0000ff54";
 let red="#ff000054";
 let black="#00000082";
-console.log(filterColor);
+
 constraints={
     video:true,
     audio:true
@@ -18,23 +18,39 @@ let recordflag=false;
 let captureflag=false;
 navigator.mediaDevices.getUserMedia(constraints)
 .then(function(stream) {
+
+    //here stream is nothing but every hing hat capture by your media deice video ,audio
     recorder=new MediaRecorder(stream);
+//MediaRecorder is use to record our stream .
     video.srcObject=stream;
     recorder.addEventListener("start",function(e){
         chunk=[];
     })
   recorder.ondataavailable = function(e) {
     chunk.push(e.data);
+    console.log(chunk);
   }
   recorder.addEventListener("stop",function(e){
-      //convert chunk into video
-      let blob= new Blob(chunk,{type:"video/mp4"});
+      //convert chunk into blob beacue we want URl to download that video and we have function URL.createobjectURL(blob)
       
+      let blob= new Blob(chunk,{type:"video/mp4"});
+      console.log(blob);
       videoURL=URL.createObjectURL(blob);
-      let a=document.createElement("a");
-      a.href=videoURL;
-      a.download="stream";
-      a.click();
+      if(db)
+      {
+          let vid=shortid();
+          let dbtransaction=db.transaction("video","readwrite");
+          let videoStore=dbtransaction.objectStore("video");
+          let videoentry={
+              id:`vid-${vid}`,
+              blobdata:blob
+          }
+          videoStore.add(videoentry);
+      }
+    //   let a=document.createElement("a");
+    //   a.href=videoURL;
+    //   a.download="stream";
+    //   a.click();
   })
 })
 captureBtn.addEventListener("click",function(e){
@@ -48,10 +64,21 @@ cxt.drawImage(video,0,0,canvas.width,canvas.height);
 cxt.fillStyle = filterColor;
 cxt.fillRect(0, 0, canvas.width, canvas.height);
 let imageURl=canvas.toDataURL();
-let atag=document.createElement("a");
-atag.setAttribute("download","photo.jpg");
-atag.setAttribute("href",imageURl);
-atag.click();
+if(db)
+{
+    let Imid=shortid();
+    let dbtransaction=db.transaction("image","readwrite");
+    let ImageStore=dbtransaction.objectStore("image");
+    let imageentry={
+        id:`img-${Imid}`,
+        URLi:imageURl
+    }
+    ImageStore.add(imageentry);
+}
+// let atag=document.createElement("a");
+// atag.setAttribute("download","photo.jpg");
+// atag.setAttribute("href",imageURl);
+// atag.click();
 })
 recordBtn.addEventListener("click",function(e){
     if(!recorder)

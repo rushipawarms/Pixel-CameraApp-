@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    
     <title>Camera</title>
 </head>
 <body>
@@ -30,6 +33,19 @@
         <div class="filter black"></div>
     </div>
     <div class="filter-color"></div>
+   
+        <span class="material-icons gallery">
+            collections
+        </span>
+    
+    <script src="https://unpkg.com/shortid-dist@1.0.5/dist/shortid-2.2.13.js"></script>
+    <script src="db.js"></script>
     <script src="script.js"></script>
+    <script>
+        let galleryEl=document.querySelector(".gallery");
+        galleryEl.addEventListener("click",function(e){
+            location.assign("./gallery.html");
+        })
+    </script>
 </body>
 </html>

@@ -17,7 +17,7 @@ width:100%;
 .action-btn{
     height: 10rem;
     width: 5rem;
-    background-color: black;
+    background-color: transparent;
     position: absolute;
     top:40%;
     left:90%;
@@ -160,4 +160,18 @@ background-color: #00000082;
         z-index: 2;
         border-radius: 15px;
     }
+}
+
+.material-icons{
+color:white;
+font-size: 50px;
+}
+.gallery{
+position: absolute;
+top: 70%;
+right: 6%;
+z-index: 2;
+}
+.gallery:hover{
+    cursor: pointer;
 }
