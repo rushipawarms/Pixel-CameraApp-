@@ -104,9 +104,9 @@ function downloadListener(e) {
         let imageRequest = imageStore.get(id);
         imageRequest.onsuccess = (e) => {
             let imageResult = imageRequest.result;
-
+            let url=imageResult.URLi;
             let a = document.createElement("a");
-            a.href = imageResult.URLi;
+            a.href = url;
             a.download = "image.jpg";
             a.click();
         }
