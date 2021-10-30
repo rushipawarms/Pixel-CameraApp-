@@ -54,7 +54,7 @@ navigator.mediaDevices.getUserMedia(constraints)
   })
 })
 captureBtn.addEventListener("click",function(e){
-captureBtn.classList.remove("scale-capture");
+
 captureBtn.classList.add("scale-capture");
 let canvas=document.createElement("canvas");
 canvas.width = video.videoWidth;
@@ -74,6 +74,9 @@ if(db)
         URLi:imageURl
     }
     ImageStore.add(imageentry);
+    setTimeout(() => {
+        captureBtn.classList.remove("scale-capture");
+    }, 500)
 }
 // let atag=document.createElement("a");
 // atag.setAttribute("download","photo.jpg");
